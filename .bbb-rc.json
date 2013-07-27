@@ -1,0 +1,15 @@
+{
+    "name": "tictactoe",
+    "testFramework": "mocha",
+    "moduleStyle": "amd",
+    "templateEngine": "handlebars",
+    "indent": {
+        "char": "space",
+        "size": 4
+    },
+    "paths": {
+        "base": ".",
+        "tests": "test",
+        "modules": "app/modules"
+    }
+}
