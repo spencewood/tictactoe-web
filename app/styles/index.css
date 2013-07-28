@@ -2,5 +2,22 @@
 
 @import "../../vendor/bower/html5-boilerplate/css/normalize.css";
 @import "../../vendor/bower/html5-boilerplate/css/main.css";
+@import "../../vendor/bower/bootstrap/dist/css/bootstrap.css";
 
 /*-- Application stylesheets. -----------------------------------------------*/
+
+.board-list{
+    height: 300px !important;
+}
+
+.board-list .complete{
+    color: #333;
+}
+
+.board-list .ready{
+    color: green;
+}
+
+.board-list .waiting{
+    color: orange;
+}

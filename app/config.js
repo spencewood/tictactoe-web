@@ -10,7 +10,10 @@ require.config({
     },
 
     hbs: {
-        disableI18n: true
+        disableI18n: true,
+        helperPathCallback: function(name){
+            return 'templates/helpers/' + name;
+        }
     },
 
     // This will help with cache issues related to development.

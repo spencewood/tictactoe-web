@@ -15,7 +15,6 @@ define(function(require, exports, module) {
             boardList.render();
 
             Boards.fetch({ reset: true });
-            console.log("Welcome to your / route.");
         }
     });
 
