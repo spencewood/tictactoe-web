@@ -1,13 +1,14 @@
 define(function(require){
     var Backbone = require('backbone');
     var Boards = require('collections/boards');
-    var BoardItemView = require('modules/board/board-item-view');
+    var BoardItemView = require('views/board/board-item-view');
 
     var View = Backbone.View.extend({
         collection: Boards,
 
         initialize: function(){
             Boards.on('reset', this.renderList.bind(this));
+            Boards.on('add', this.renderOne.bind(this));
         },
 
         renderOne: function(item){

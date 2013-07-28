@@ -2,7 +2,8 @@ define(function(require, exports, module) {
 
     var Backbone = require("backbone");
     var Boards = require('collections/boards');
-    var BoardListView = require('modules/board/board-list-view');
+    var BoardListView = require('views/board/board-list-view');
+    var BoardCreateView = require('views/board/board-create-view')
 
     // Defining the application router.
     module.exports = Backbone.Router.extend({
@@ -12,7 +13,9 @@ define(function(require, exports, module) {
 
         index: function() {
             var boardList = new BoardListView({ el: '.board-list' });
+            var boardCreate = new BoardCreateView({ el: '.board-create-container' });
             boardList.render();
+            boardCreate.render();
 
             Boards.fetch({ reset: true });
         }

@@ -4,51 +4,11 @@ define(function(require, exports, module) {
     var _ = require("underscore");
     var $ = require("jquery");
     var Backbone = require("backbone");
-    //var LayoutManager = require("backbone.layoutmanager");
 
     var app = module.exports = {};
 
     // The root path to run the application through.
     app.root = "/";
-
-    // Configure LayoutManager with Backbone Boilerplate defaults.
-    // LayoutManager.configure({
-    //     // Allow LayoutManager to augment Backbone.View.prototype.
-    //     manage: true,
-
-    //     // Indicate where templates are stored.
-    //     prefix: "app/templates/",
-
-    //     // This custom fetch method will load pre-compiled templates or fetch them
-    //     // remotely with AJAX.
-    //     fetch: function(path) {
-    //         var JST = window.JST;
-    //         var Handlebars = require("handlebars");
-
-    //         // Concatenate the file extension.
-    //         path = path + ".hbs";
-
-    //         // If cached, use the compiled template.
-    //         if (JST && JST[path]) {
-    //             // If the template hasn't been compiled yet, then compile.
-    //             if (!JST[path].__compiled__) {
-    //                 JST[path] = Handlebars.template(JST[path]);
-    //                 JST[path].__compiled__ = true;
-    //             }
-
-    //             return JST[path];
-    //         }
-
-    //         // Put fetch into `async-mode`.
-    //         var done = this.async();
-
-    //         // Seek out the template asynchronously.
-    //         $.get(app.root + path, function(contents) {
-    //             done(Handlebars.compile(contents));
-    //         }, "text");
-    //     }
-
-    // });
 
     // The application user interface handles link hijacking and can be modified
     // to handle other application global actions as well.
