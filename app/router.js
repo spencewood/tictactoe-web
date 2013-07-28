@@ -11,8 +11,7 @@ define(function(require, exports, module) {
         },
 
         index: function() {
-            var boardList = new BoardListView();
-            $('.board-list-container').append(boardList.el);
+            var boardList = new BoardListView({ el: '.board-list' });
             boardList.render();
 
             Boards.fetch({ reset: true });
