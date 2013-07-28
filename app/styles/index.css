@@ -6,8 +6,8 @@
 
 /*-- Application stylesheets. -----------------------------------------------*/
 
-.board-list{
-    height: 300px !important;
+body {
+    padding-top: 70px;
 }
 
 .board-list .complete{

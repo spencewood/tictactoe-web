@@ -12,10 +12,9 @@ define(function(require, exports, module) {
         },
 
         index: function() {
-            var boardList = new BoardListView({ el: '.board-list' });
+            var boardList = new BoardListView({ el: 'body' });
             var boardCreate = new BoardCreateView({ el: '.board-create-container' });
             boardList.render();
-            boardCreate.render();
 
             Boards.fetch({ reset: true });
         }
