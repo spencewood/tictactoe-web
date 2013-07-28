@@ -9,6 +9,10 @@ require.config({
         "underscore": "../vendor/jam/lodash/dist/lodash.underscore"
     },
 
+    hbs: {
+        disableI18n: true
+    },
+
     // This will help with cache issues related to development.
     urlArgs: "bust=" + Number(new Date())
 });
