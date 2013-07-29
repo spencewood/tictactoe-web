@@ -14,7 +14,8 @@ define(function(require){
             this.$boardDetail = this.$el.find('.board-detail-container');
             this.$boardDetail.isotope({
                 itemSelector: '.item',
-                layoutMode: 'fitRows'
+                layoutMode: 'fitRows',
+                filter: '.all'
             });
 
             Boards.on('reset', this.renderList.bind(this));
@@ -40,7 +41,7 @@ define(function(require){
         },
 
         renderOne: function(item){
-            var markup =this.getItemMarkup(item);
+            var markup = this.getItemMarkup(item);
             this.insert(markup);
         },
 
