@@ -1,4 +1,4 @@
 /dist/
 /node_modules/
-/vendor/
-!/vendor/other
+/vendor/bower
+/vendor/jam

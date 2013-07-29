@@ -17,7 +17,7 @@ define(function(require){
         message: BoardController.create,
         connect: boardCreateDeferred.resolve
     });
-
+/*
     var boardJoinDeferred = $.Deferred();
     pubnub.subscribe({
         channel: channel('board:join'),
@@ -52,13 +52,13 @@ define(function(require){
         message: BoardController.complete,
         connect: boardCompleteDeferred.resolve
     });
-
+*/
     return {
-        boardCreate: boardCreateDeferred,
+        boardCreate: boardCreateDeferred/*,
         boardJoin: boardJoinDeferred,
         boardLeave: boardLeaveDeferred,
         boardReady: boardReadyDeferred,
         boardMove: boardMoveDeferred,
-        boardComplete: boardCompleteDeferred
+        boardComplete: boardCompleteDeferred*/
     };
 });
