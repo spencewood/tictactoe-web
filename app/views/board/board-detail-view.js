@@ -30,7 +30,9 @@ define(function(require){
         },
 
         filter: function(ids){
-            console.log('filter by', ids);
+            this.$boardDetail.isotope({ filter: ids.map(function(id){
+                return '[data-id=' + id + ']';
+            }).join(', ')});
         },
 
         getItemMarkup: function(item){
