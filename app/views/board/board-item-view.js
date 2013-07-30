@@ -4,7 +4,8 @@ define(function(require){
 
     var View = Backbone.View.extend({
         render: function(){
-            return boardItemTemplate(this.model.toJSON());
+            this.$el.html(boardItemTemplate(this.model.toJSON()));
+            return this;
         }
     });
 

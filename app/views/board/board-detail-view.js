@@ -13,7 +13,7 @@ define(function(require){
         initialize: function(){
             this.$boardDetail = this.$el.find('.board-detail-container');
             this.$boardDetail.isotope({
-                itemSelector: '.item',
+                itemSelector: '.board-container',
                 layoutMode: 'fitRows',
                 filter: '.all'
             });
@@ -36,21 +36,20 @@ define(function(require){
             }).join(', ')});
         },
 
-        getItemMarkup: function(item){
-            return (new BoardDetailItemView({ model: item })).render().html();
+        getItem: function(item){
+            return new BoardDetailItemView({ model: item }).render().$el;
         },
 
         renderOne: function(item){
-            var markup = this.getItemMarkup(item);
-            this.insert(markup);
+            this.insert(this.getItem(item));
         },
 
-        renderList: function(e){
+        renderList: function(){
             this.$boardDetail.empty();
 
-            this.insert($(this.collection.map(function(b){
-                return this.getItemMarkup(b);
-            }.bind(this)).join('')));
+            this.collection.forEach(function(b){
+                this.renderOne(b);
+            }.bind(this));
         },
 
         filterBySelection: function(e){

@@ -13,7 +13,7 @@ define(function(require){
         },
 
         renderOne: function(item){
-            this.$el.append(new BoardItemView({ model: item }).render());
+            this.$el.append(new BoardItemView({ model: item }).render().el.innerHTML);
         },
 
         renderList: function(){
