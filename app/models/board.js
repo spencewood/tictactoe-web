@@ -12,7 +12,8 @@ define(function(require){
                 isComplete: false,
                 players: [],
                 spots: [2, 2, 2, 2, 2, 2, 2, 2, 2],
-                turn: 0
+                turn: 0,
+                status: 'waiting'
             };
         },
 

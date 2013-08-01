@@ -23,18 +23,6 @@ select.board-list{
     height: 300px;
 }
 
-.board-list .complete{
-    color: #333;
-}
-
-.board-list .ready{
-    color: green;
-}
-
-.board-list .waiting{
-    color: orange;
-}
-
 /* Items */
 .board-detail-container{
     height: 500px;
@@ -50,7 +38,6 @@ select.board-list{
     padding: 10px;
     margin: 10px;
     overflow: hidden;
-    display: table;
 }
 
 .board .spot{
@@ -60,5 +47,36 @@ select.board-list{
     padding: 5px;
     text-align: center;
     vertical-align: middle;
-    display: table-cell;
+}
+
+.board .spot a{
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+/* Status */
+
+.board-list .complete{
+    color: #333;
+}
+
+.board-list .ready{
+    color: green;
+}
+
+.board-list .waiting{
+    color: orange;
+}
+
+.board.complete{
+    border: 1px solid #333;
+}
+
+.board.ready{
+    border: 1px solid green;
+}
+
+.board.waiting{
+    border: 1px solid orange;
 }

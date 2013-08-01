@@ -8,7 +8,7 @@ define(function(require){
     var Player = Backbone.Model.extend({
         defaults: function(){
             return {
-                id: Math.floor(Math.random() * 100)
+                id: 2
             };
         }
     });

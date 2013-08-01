@@ -5,14 +5,17 @@ define(function(require){
     var Controller = {
         create: function(m){
             Boards.add([{ _id: m.boardId }]);
+
             Backbone.Events.trigger('board:create', m);
         },
 
         join: function(m){
             var board = Boards.get(m.boardId);
             if(board !== null){
+                var players = board.get('players');
+                players.push(m.playerId);
                 board.set({
-                    players: board.get('players').push(m.playerId)
+                    players: players
                 });
             }
             Backbone.Events.trigger('board:join', m);
@@ -26,7 +29,8 @@ define(function(require){
                     var players = board.get('players');
                     players.splice(index, 1);
                     board.set({
-                        players: players
+                        players: players,
+                        status: 'waiting'
                     });
                 }
             }
@@ -34,18 +38,26 @@ define(function(require){
         },
 
         ready: function(m){
+            var board = Boards.get(m.boardId);
+            if(board !== null){
+                board.set({ status: 'ready' });
+            }
             Backbone.Events.trigger('board:ready', m);
         },
 
         move: function(m){
             var board = Boards.get(m.boardId);
             if(board !== null){
-
+                board.set('spots', m.spots);
             }
             Backbone.Events.trigger('board:move', m);
         },
 
         complete: function(m){
+            var board = Boards.get(m.boardId);
+            if(board !== null){
+                board.set({ status: 'complete' })
+            }
             Backbone.Events.trigger('board:complete', m);
         }
     };

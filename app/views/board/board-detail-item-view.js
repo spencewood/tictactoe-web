@@ -9,9 +9,18 @@ define(function(require){
             'click .join': 'join'
         },
 
-        render: function(){
+        initialize: function(){
             this.setElement(boardDetailItem(this.model.toJSON()));
+            this.model.on('change:spots', this.rerender.bind(this));
+            this.model.on('change:status', this.changeStatus.bind(this));
+        },
 
+        join: function(e){
+            e.preventDefault();
+            this.model.join(Player.get('id'));
+        },
+
+        render: function(){
             var $board = this.$el.find('.board');
 
             this.model.get('spots').forEach(function(spot, idx){
@@ -27,9 +36,16 @@ define(function(require){
             return this;
         },
 
-        join: function(e){
-            e.preventDefault();
-            this.model.join(Player.get('id'));
+        rerender: function(){
+            this.$el.find('.board').empty();
+            this.render();
+        },
+
+        changeStatus: function(){
+            var statuses = ['waiting', 'ready', 'complete'];
+            this.$el.find('.board')
+                .removeClass(statuses.join(' '))
+                .addClass(this.model.get('status'));
         }
     });
 
