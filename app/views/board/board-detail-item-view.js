@@ -12,7 +12,9 @@ define(function(require){
         initialize: function(){
             this.setElement(boardDetailItem(this.model.toJSON()));
             this.model.on('change:spots', this.rerender.bind(this));
+            this.model.on('change:players', this.updateJoinable.bind(this));
             this.model.on('change:status', this.changeStatus.bind(this));
+            this.model.on('change:status', this.updateJoinable.bind(this));
         },
 
         join: function(e){
@@ -33,6 +35,8 @@ define(function(require){
                 );
             }.bind(this));
 
+            this.updateJoinable();
+
             return this;
         },
 
@@ -46,6 +50,15 @@ define(function(require){
             this.$el.find('.board')
                 .removeClass(statuses.join(' '))
                 .addClass(this.model.get('status'));
+        },
+
+        updateJoinable: function(){
+            if(this.model.canJoin(Player.get('id'))){
+                this.$el.addClass('joinable');
+            }
+            else{
+                this.$el.removeClass('joinable');
+            }
         }
     });
 

@@ -4,12 +4,24 @@
 
 define(function(require){
     var Backbone = require('backbone');
+    var guid = require('helpers/guid');
 
     var Player = Backbone.Model.extend({
         defaults: function(){
             return {
-                id: 2
+                id: guid.new()
             };
+        },
+
+        leave: function(){
+            return $.ajax({
+                type: 'POST',
+                url: '/players/leave',
+                async: false,
+                data: {
+                    playerId: this.id
+                }
+            });
         }
     });
 

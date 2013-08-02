@@ -23,6 +23,11 @@ define(function(require){
             return json;
         },
 
+        canJoin: function(playerId){
+            return this.get('players').length < 2 &&
+                this.get('players').indexOf(playerId) === -1;
+        },
+
         play: function(playerId, spot){
             return $.ajax({
                 type: 'POST',

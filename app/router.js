@@ -1,7 +1,8 @@
 define(function(require, exports, module) {
-
-    var Backbone = require("backbone");
+    var $ = require('jquery');
+    var Backbone = require('backbone');
     var Boards = require('collections/boards');
+    var Player = require('models/player');
     var BoardListView = require('views/board/board-list-view');
     var BoardCreateView = require('views/board/board-create-view');
     var BoardDetailView = require('views/board/board-detail-view');
@@ -24,4 +25,7 @@ define(function(require, exports, module) {
         }
     });
 
+    $(window).on('beforeunload', function(){
+        Player.leave();
+    });
 });

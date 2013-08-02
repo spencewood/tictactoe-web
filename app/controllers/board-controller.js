@@ -12,11 +12,8 @@ define(function(require){
         join: function(m){
             var board = Boards.get(m.boardId);
             if(board !== null){
-                var players = board.get('players');
-                players.push(m.playerId);
-                board.set({
-                    players: players
-                });
+                board.get('players').push(m.playerId);
+                board.trigger('change:players');
             }
             Backbone.Events.trigger('board:join', m);
         },
@@ -26,12 +23,9 @@ define(function(require){
             if(board !== null){
                 var index = board.indexOf(m.boardId);
                 if(index >= 0){
-                    var players = board.get('players');
-                    players.splice(index, 1);
-                    board.set({
-                        players: players,
-                        status: 'waiting'
-                    });
+                    board.get('players').splice(index, 1);
+                    board.set({ status: 'waiting' });
+                    board.trigger('change:players');
                 }
             }
             Backbone.Events.trigger('board:leave', m);
