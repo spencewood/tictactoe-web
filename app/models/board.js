@@ -24,8 +24,17 @@ define(function(require){
         },
 
         canJoin: function(playerId){
-            return this.get('players').length < 2 &&
-                this.get('players').indexOf(playerId) === -1;
+            var players = this.get('players');
+            return players.length < 2 &&
+                players.indexOf(playerId) === -1;
+        },
+
+        canPlay: function(playerId){
+            var players = this.get('players');
+            var index = players.indexOf(playerId);
+            return players.length === 2 &&
+                index >= 0 &&
+                this.get('turn') % 2 === index;
         },
 
         play: function(playerId, spot){

@@ -24,8 +24,4 @@ define(function(require, exports, module) {
             Boards.fetch({ reset: true });
         }
     });
-
-    $(window).on('beforeunload', function(){
-        Player.leave();
-    });
 });

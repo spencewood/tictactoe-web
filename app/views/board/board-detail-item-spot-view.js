@@ -1,10 +1,11 @@
 define(function(require){
     var Backbone = require('backbone');
     var Player = require('models/player');
+    var DisposableView = require('views/_disposable-view');
     var boardDetailItemSpot = require('hbs!templates/board-detail-item-spot');
     var settings = require('settings');
 
-    var View = Backbone.View.extend({
+    var View = DisposableView.extend({
         events: {
             'click a': 'play'
         },

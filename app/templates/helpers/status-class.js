@@ -1,11 +1,12 @@
 define(function(require){
     var Handlebars = require('handlebars');
+    var _ = require('underscore');
 
     var getStatusClass = function(context, options){
-        if(context.isComplete){
+        if(_.result(context.isComplete)){
             return 'complete';
         }
-        else if(context.isReady){
+        else if(_.result(context.isReady) && _.result(context.canPlay)){
             return 'ready';
         }
         else{

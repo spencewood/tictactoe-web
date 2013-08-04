@@ -1,10 +1,11 @@
 define(function(require){
     var Backbone = require('backbone');
     var Player = require('models/player');
+    var DisposableView = require('views/_disposable-view');
     var BoardDetailItemSpotView = require('views/board/board-detail-item-spot-view');
     var boardDetailItem = require('hbs!templates/board-detail-item');
 
-    var View = Backbone.View.extend({
+    var View = DisposableView.extend({
         events: {
             'click .join': 'join'
         },
@@ -13,8 +14,7 @@ define(function(require){
             this.setElement(boardDetailItem(this.model.toJSON()));
             this.model.on('change:spots', this.rerender.bind(this));
             this.model.on('change:players', this.updateJoinable.bind(this));
-            this.model.on('change:status', this.changeStatus.bind(this));
-            this.model.on('change:status', this.updateJoinable.bind(this));
+            this.model.on('change:status', this.rerender.bind(this));
         },
 
         join: function(e){
@@ -28,7 +28,6 @@ define(function(require){
             this.model.get('spots').forEach(function(spot, idx){
                 $board.append(
                     new BoardDetailItemSpotView({
-                        model: this.model,
                         idx: idx,
                         spot: spot
                     }).render().el
@@ -41,15 +40,9 @@ define(function(require){
         },
 
         rerender: function(){
-            this.$el.find('.board').empty();
+            //this.$el.find('.board').empty();
+            this.destroySubviews();
             this.render();
-        },
-
-        changeStatus: function(){
-            var statuses = ['waiting', 'ready', 'complete'];
-            this.$el.find('.board')
-                .removeClass(statuses.join(' '))
-                .addClass(this.model.get('status'));
         },
 
         updateJoinable: function(){
@@ -59,6 +52,12 @@ define(function(require){
             else{
                 this.$el.removeClass('joinable');
             }
+        },
+
+        dispose: function(){
+            this.model.off('change:spots');
+            this.model.off('change:players');
+            this.model.off('change:status');
         }
     });
 
