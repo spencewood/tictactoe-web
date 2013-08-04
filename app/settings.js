@@ -3,7 +3,7 @@ define(function(require){
         isDevelopment: true,
         baseApiUrl: 'http://localhost:5000',
         pubnub: {
-            subscribe_key: 'sub-c-3bf92650-f219-11e2-a1ec-02ee2ddab7fe'
+            subscribe_key: 'sub-c-bf1ed188-d4af-11e2-bfe7-02ee2ddab7fe'
         },
 
         tokens: {

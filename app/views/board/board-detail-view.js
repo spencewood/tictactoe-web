@@ -2,15 +2,18 @@ define(function(require){
     var Backbone = require('backbone');
     var Boards = require('collections/boards');
     var isotope = require('isotope');
+    var DisposableView = require('views/_disposable-view');
     var BoardDetailItemView = require('views/board/board-detail-item-view');
 
-    var View = Backbone.View.extend({
+    var View = DisposableView.extend({
         collection: Boards,
         events: {
             'change .board-list': 'filterBySelection'
         },
 
         initialize: function(){
+            DisposableView.prototype.initialize.call(this);
+
             this.$boardDetail = this.$el.find('.board-detail-container');
             this.$boardDetail.isotope({
                 itemSelector: '.board-container',
@@ -20,6 +23,11 @@ define(function(require){
 
             Boards.on('reset', this.renderList.bind(this));
             Boards.on('add', this.renderOne.bind(this));
+        },
+
+        dispose: function(){
+            Boards.off('reset');
+            Boards.off('add');
         },
 
         reload: function(){
@@ -36,16 +44,14 @@ define(function(require){
             }).join(', ')});
         },
 
-        getItem: function(item){
-            return new BoardDetailItemView({ model: item }).render().$el;
-        },
-
         renderOne: function(item){
-            this.insert(this.getItem(item));
+            this.insert(this.addSubview(
+                new BoardDetailItemView({ model: item })
+            ).render().$el);
         },
 
         renderList: function(){
-            this.$boardDetail.empty();
+            this.destroySubviews();
 
             this.collection.forEach(function(b){
                 this.renderOne(b);

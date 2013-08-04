@@ -11,10 +11,19 @@ define(function(require){
         },
 
         initialize: function(){
+            DisposableView.prototype.initialize.call(this);
+
             this.setElement(boardDetailItem(this.model.toJSON()));
+            
             this.model.on('change:spots', this.rerender.bind(this));
             this.model.on('change:players', this.updateJoinable.bind(this));
             this.model.on('change:status', this.rerender.bind(this));
+        },
+
+        dispose: function(){
+            this.model.off('change:spots');
+            this.model.off('change:players');
+            this.model.off('change:status');
         },
 
         join: function(e){
@@ -27,10 +36,13 @@ define(function(require){
 
             this.model.get('spots').forEach(function(spot, idx){
                 $board.append(
-                    new BoardDetailItemSpotView({
-                        idx: idx,
-                        spot: spot
-                    }).render().el
+                    this.addSubview(
+                        new BoardDetailItemSpotView({
+                            idx: idx,
+                            spot: spot,
+                            model: this.model
+                        })
+                    ).render().el
                 );
             }.bind(this));
 
@@ -52,12 +64,6 @@ define(function(require){
             else{
                 this.$el.removeClass('joinable');
             }
-        },
-
-        dispose: function(){
-            this.model.off('change:spots');
-            this.model.off('change:players');
-            this.model.off('change:status');
         }
     });
 

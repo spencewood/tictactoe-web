@@ -9,6 +9,7 @@ define(function(require){
 
         addSubview: function(subview){
             this.subviews.push(subview);
+            return subview;
         },
 
         dispose: function(){
@@ -17,7 +18,6 @@ define(function(require){
 
         destroySubviews: function(){
             this.subviews.forEach(function(subview){
-                console.log('destroying', subview);
                 subview.destroy();
             });
         },
