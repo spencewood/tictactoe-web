@@ -10,7 +10,8 @@ define(function(require, exports, module) {
     // Defining the application router.
     module.exports = Backbone.Router.extend({
         routes: {
-            "": "index"
+            '': 'index',
+            'admin': 'admin'
         },
 
         index: function() {
