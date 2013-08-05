@@ -16,12 +16,12 @@ define(function(require){
         isLoggedIn = false;
     };
 
-    var storePlayerToken = function(token){
+    var storeToken = function(token){
         storageController.store(settings.playerStorage, token);
         isLoggedIn = true;
     };
 
-    var getPlayerToken = function(){
+    var getToken = function(){
         return storageController.get(settings.playerStorage);
     };
 
@@ -29,7 +29,7 @@ define(function(require){
         idAttribute: '_id',
 
         initialize: function(){
-            var token = getPlayerToken();
+            var token = getToken();
             if(typeof token !== 'undefined' && token !== null){
                 this.set('token', token);
             }
@@ -45,11 +45,24 @@ define(function(require){
             return isLoggedIn;
         },
 
+        getToken: function(){
+            return getToken();
+        },
+
         logout: function(){
             clearStorage();
             this.trigger('loggedOut');
         },
 
+        handleUserData: function(data){
+            data.id = data._id;
+            delete data._id;
+            this.set(data, { silent: true });
+            storeToken(data.token);
+            this.trigger('loggedIn');
+        },
+
+        //ajax
         whoAmI: function(){
             var token = this.get('token');
             if(typeof token === 'undefined'){
@@ -63,16 +76,10 @@ define(function(require){
                     data: {
                         token: token
                     }
-                }).done(function(data){
-                    data.id = data._id;
-                    delete data._id;
-                    this.set(data, { silent: true });
-                    storePlayerToken(data.token);
-                    this.trigger('loggedIn');
-                }.bind(this)).fail(function(){
-                    clearStorage();
-                    this.trigger('loggedOut');
-                }).always(loginStatusKnown.resolve);
+                })
+                .done(this.handleUserData.bind(this))
+                .fail(this.logout.bind(this))
+                .always(loginStatusKnown.resolve);
             }
 
             return loginStatusKnown;
