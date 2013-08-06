@@ -7,7 +7,8 @@ define(function(require){
             'click button': 'create'
         },
 
-        create: function(){
+        create: function(e){
+            e.preventDefault();
             new Board().save();
         }
     });
