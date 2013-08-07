@@ -14,11 +14,9 @@ define(function(require){
         initialize: function(){
             DisposableView.prototype.initialize.call(this);
 
-            this.$boardDetail = this.$el.find('.board-detail-container');
-            this.$boardDetail.isotope({
+            this.$el.isotope({
                 itemSelector: '.board-container',
-                layoutMode: 'fitRows',
-                filter: '.all'
+                layoutMode: 'fitRows'
             });
 
             Boards.on('reset', this.renderList.bind(this));
@@ -31,15 +29,15 @@ define(function(require){
         },
 
         reload: function(){
-            this.$boardDetail.isotope('reloadItems');
+            this.$el.isotope('reloadItems');
         },
 
         insert: function(markup){
-            this.$boardDetail.isotope('insert', markup);
+            this.$el.isotope('insert', markup);
         },
 
         filter: function(ids){
-            this.$boardDetail.isotope({ filter: ids.map(function(id){
+            this.$el.isotope({ filter: ids.map(function(id){
                 return '[data-id=' + id + ']';
             }).join(', ')});
         },

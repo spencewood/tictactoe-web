@@ -17,11 +17,14 @@
     text-shadow: 2px 2px #333;
 }
 
+
+/* Containers */
 .row-title{
     color: #fff;
     background-color: #555;
     margin-bottom: 0;
     padding-bottom: 0;
+    height: 78px;
 }
 
 .row-secondary{
@@ -29,6 +32,19 @@
     background-color: #e7e7e7;
 }
 
+.row-secondary .row-secondary-container{
+    padding: 20px 0;
+}
+
+.login-container{
+    padding-top: 20px;
+}
+
+.board-create-container{
+    
+}
+
+/* Content */
 select.board-list{
     height: 300px;
 }

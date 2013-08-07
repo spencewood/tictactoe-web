@@ -19,20 +19,18 @@
         <div class="navbar navbar-static-top row-title">
             <div class="container">
                 <div class="col-lg-9">
-                    <p id="logo">
+                    <div id="logo">
                         ttt
-                    </p>
+                    </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="login-container">
-                        <p>
-                            <div class="input-group">
-                                <input type="email" name="email" class="form-control" placeholder="Enter email">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">Login</button>
-                                </span>
-                            </div>
-                        </p>
+                        <div class="input-group">
+                            <input type="email" name="email" class="form-control" placeholder="Enter email">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">Login</button>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -40,27 +38,40 @@
         <div class="row row-secondary">
             <div class="container">
                 <div class="col-lg-10">
-                    
+                    <div class="filter-container row-secondary-container">
+                        <ul class="nav nav-pills">
+                            <li>
+                                <a href="#">All boards</a>
+                            </li>
+                            <li>
+                                <a href="#my">My boards</a>
+                            </li>
+                            <li>
+                                <a href="#active">Active boards</a>
+                            </li>
+                            <li>
+                                <a href="#completed">Completed boards</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="col-lg-2">
-                    <div class="board-create-container">
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block">Create Board</button>
-                        </div>
+                    <div class="board-create-container row-secondary-container">
+                        <button type="submit" class="btn btn-primary btn-block">Create Board</button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-lg-3">
+<!--                 <div class="col-lg-3">
                     
                     <div class="board-list-container">
                         <select multiple="multiple" class="form-control board-list">
                         </select>
                     </div>
-                </div>
-                <div class="col-lg-9">
+                </div> -->
+                <div class="col-lg-12">
                     <div class="board-detail-container">
                     </div>
                 </div>
