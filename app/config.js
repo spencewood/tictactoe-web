@@ -3,12 +3,12 @@
 require.config({
     paths: {
         // Make vendor easier to access.
-        "vendor": "../vendor",
+        'vendor': '../vendor',
 
         // Opt for Lo-Dash Underscore compatibility build.
-        "underscore": "../vendor/jam/lodash/dist/lodash.underscore",
+        'underscore': '../vendor/jam/lodash/dist/lodash.underscore',
 
-        "pubnub": "../vendor/other/pubnub-3.5.3.min"
+        'pubnub': '../vendor/other/pubnub-3.5.3.min'
     },
 
     shim: {

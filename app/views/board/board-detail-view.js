@@ -14,23 +14,34 @@ define(function(require){
             });
 
             this.collection.on('reset', this.render.bind(this));
-            this.collection.on('add', this.addView.bind(this));
+            this.collection.on('add', this.add.bind(this));
         },
 
         reload: function(){
             this.$el.isotope('reloadItems');
         },
 
-        insert: function(view){
+        insertIsotope: function(view){
             if(typeof view.$el !== 'undefined'){
                 this.$el.isotope('insert', view.$el);
             }
+            return view;
         },
 
-        addView: function(model){
-            this.insert(this.insertView(
+        addView: function(model, render){
+            var view = this.insertIsotope(this.insertView(
                 new BoardDetailItemView({ model: model })
             ));
+
+            //only here for rendering created items
+            if(render === true){
+                view.render();
+            }
+        },
+
+        add: function(model){
+            console.log('calling add');
+            this.addView(model, true);
         },
 
         beforeRender: function(){

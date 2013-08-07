@@ -11,8 +11,6 @@ define(function(require, exports, module) {
     new AccountLoginView({ el: '.login-container' });
     new BoardCreateView({ el: '.board-create-container' });
 
-    Boards.fetch({ reset: true });
-
     // Defining the application router.
     module.exports = Backbone.Router.extend({
         routes: {
@@ -39,4 +37,6 @@ define(function(require, exports, module) {
             filter.navigate('completed');
         }
     });
+
+    Boards.fetch({ reset: true });
 });
