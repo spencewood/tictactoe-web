@@ -22,8 +22,5 @@ require.config({
         helperPathCallback: function(name){
             return 'templates/helpers/' + name;
         }
-    },
-
-    // This will help with cache issues related to development.
-    urlArgs: "bust=" + Number(new Date())
+    }
 });

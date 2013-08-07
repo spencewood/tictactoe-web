@@ -3,12 +3,37 @@ define(function(require){
 
     var View = Backbone.View.extend({
         events: {
-            //'click button': 'create'
+            'click a': 'navigate'
         },
 
-        create: function(e){
+        initialize: function(options){
+            this.navigateByHash(options.hash || '');
+        },
+
+        getMenuItems: function(){
+            return this.$el.find('li');
+        },
+
+        clearActive: function(){
+            this.getMenuItems().filter('.active').removeClass('active');
+        },
+
+        setActive: function($el){
+            $el.addClass('active');
+
+        },
+
+        navigate: function(e){
             //e.preventDefault();
-            //new Board().save();
+
+            this.clearActive();
+            this.setActive($(e.currentTarget).parents('li:first'));
+        },
+
+        navigateByHash: function(hash){
+            var item = this.getMenuItems()
+                .find('a[href=#' + hash + ']').parents('li:first');
+            this.setActive(item);
         }
     });
 

@@ -1,22 +1,22 @@
 define(function(require){
     var Backbone = require('backbone');
     var Player = require('models/player');
-    var DisposableView = require('views/_disposable-view');
     var boardDetailItemSpot = require('hbs!templates/board-detail-item-spot');
     var settings = require('settings');
 
-    var View = DisposableView.extend({
+    var View = Backbone.View.extend({
         events: {
             'click a': 'play'
         },
 
-        render: function(){
-            this.setElement(
-                boardDetailItemSpot({
-                    token: settings.tokens[this.options.spot]
-                })
-            );
-            return this;
+        serialize: function(){
+            return {
+                token: settings.tokens[this.options.spot]
+            };
+        },
+
+        beforeRender: function(){
+            this.setElement(boardDetailItemSpot(this.serialize));
         },
 
         play: function(e){

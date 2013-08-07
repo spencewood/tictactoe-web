@@ -4,11 +4,15 @@ define(function(require, exports, module) {
     var _ = require("underscore");
     var $ = require("jquery");
     var Backbone = require("backbone");
+    var LayoutManager = require("backbone.layoutmanager");
 
     var app = module.exports = {};
 
     // The root path to run the application through.
     app.root = "/";
+
+    // Configure LayoutManager with Backbone Boilerplate defaults.
+    LayoutManager.configure({ manage: true });
 
     // The application user interface handles link hijacking and can be modified
     // to handle other application global actions as well.
@@ -20,6 +24,7 @@ define(function(require, exports, module) {
         },
 
         hijackLinks: function(ev) {
+            console.log('hijack');
             // Get the absolute anchor href.
             var $link = $(ev.currentTarget);
             var href = {
@@ -28,6 +33,8 @@ define(function(require, exports, module) {
             };
             // Get the absolute root.
             var root = location.protocol + "//" + location.host + app.root;
+
+            console.log('hijacking', href, root);
 
             // Ensure the root is part of the anchor href, meaning it's relative.
             if (href.prop.slice(0, root.length) === root) {

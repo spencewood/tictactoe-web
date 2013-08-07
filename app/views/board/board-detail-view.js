@@ -1,26 +1,20 @@
 define(function(require){
     var Backbone = require('backbone');
     var Boards = require('collections/boards');
-    var isotope = require('isotope');
-    var DisposableView = require('views/_disposable-view');
     var BoardDetailItemView = require('views/board/board-detail-item-view');
+    require('isotope');
 
-    var View = DisposableView.extend({
+    var View = Backbone.View.extend({
         collection: Boards,
-        events: {
-            'change .board-list': 'filterBySelection'
-        },
 
         initialize: function(){
-            DisposableView.prototype.initialize.call(this);
-
             this.$el.isotope({
                 itemSelector: '.board-container',
                 layoutMode: 'fitRows'
             });
 
-            Boards.on('reset', this.renderList.bind(this));
-            Boards.on('add', this.renderOne.bind(this));
+            Boards.on('reset', this.render.bind(this));
+            Boards.on('add', this.addView.bind(this));
         },
 
         dispose: function(){
@@ -32,32 +26,20 @@ define(function(require){
             this.$el.isotope('reloadItems');
         },
 
-        insert: function(markup){
-            this.$el.isotope('insert', markup);
+        insert: function(view){
+            if(typeof view.$el !== 'undefined'){
+                this.$el.isotope('insert', view.$el);
+            }
         },
 
-        filter: function(ids){
-            this.$el.isotope({ filter: ids.map(function(id){
-                return '[data-id=' + id + ']';
-            }).join(', ')});
+        addView: function(model){
+            this.insert(this.insertView(
+                new BoardDetailItemView({ model: model })
+            ));
         },
 
-        renderOne: function(item){
-            this.insert(this.addSubview(
-                new BoardDetailItemView({ model: item })
-            ).render().$el);
-        },
-
-        renderList: function(){
-            this.destroySubviews();
-
-            this.collection.forEach(function(b){
-                this.renderOne(b);
-            }.bind(this));
-        },
-
-        filterBySelection: function(e){
-            this.filter($(e.target).val());
+        beforeRender: function(){
+            this.collection.each(this.addView.bind(this));
         }
     });
 

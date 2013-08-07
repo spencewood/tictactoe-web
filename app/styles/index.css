@@ -17,6 +17,14 @@
     text-shadow: 2px 2px #333;
 }
 
+#logo a{
+    color: #fff;
+}
+
+#logo a:hover{
+    text-decoration: none;
+}
+
 
 /* Containers */
 .row-title{
