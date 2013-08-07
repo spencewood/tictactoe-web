@@ -34,6 +34,10 @@ define(function(require){
             }.bind(this));
         },
 
+        afterRender: function(){
+            this.updateJoinable();
+        },
+
         join: function(e){
             e.preventDefault();
             this.model.join(Player.get('id'));

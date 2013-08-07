@@ -24,7 +24,6 @@ define(function(require, exports, module) {
         },
 
         hijackLinks: function(ev) {
-            console.log('hijack');
             // Get the absolute anchor href.
             var $link = $(ev.currentTarget);
             var href = {
@@ -33,8 +32,6 @@ define(function(require, exports, module) {
             };
             // Get the absolute root.
             var root = location.protocol + "//" + location.host + app.root;
-
-            console.log('hijacking', href, root);
 
             // Ensure the root is part of the anchor href, meaning it's relative.
             if (href.prop.slice(0, root.length) === root) {
