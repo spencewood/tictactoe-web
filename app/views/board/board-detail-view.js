@@ -13,13 +13,8 @@ define(function(require){
                 layoutMode: 'fitRows'
             });
 
-            Boards.on('reset', this.render.bind(this));
-            Boards.on('add', this.addView.bind(this));
-        },
-
-        dispose: function(){
-            Boards.off('reset');
-            Boards.off('add');
+            this.collection.on('reset', this.render.bind(this));
+            this.collection.on('add', this.addView.bind(this));
         },
 
         reload: function(){

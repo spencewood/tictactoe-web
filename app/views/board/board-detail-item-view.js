@@ -17,12 +17,6 @@ define(function(require){
             this.model.on('change:status', this.render.bind(this));
         },
 
-        clean: function(){
-            this.model.off('change:spots');
-            this.model.off('change:players');
-            this.model.off('change:status');
-        },
-
         serialize: function(){
             return this.model.toJSON();
         },
