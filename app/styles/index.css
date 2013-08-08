@@ -48,6 +48,18 @@
     padding-top: 20px;
 }
 
+.login-container .request-login-form{
+}
+
+.login-container.error .error-form{
+}
+
+.login-container .error-form{
+}
+
+.login-container.login .request-login-form{
+}
+
 .board-create-container{
     
 }

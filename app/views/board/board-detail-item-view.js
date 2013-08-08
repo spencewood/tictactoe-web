@@ -2,7 +2,7 @@ define(function(require){
     var Backbone = require('backbone');
     var Player = require('models/player');
     var BoardDetailItemSpotView = require('views/board/board-detail-item-spot-view');
-    var boardDetailItem = require('hbs!templates/board-detail-item');
+    var boardDetailItemTemplate = require('hbs!templates/board/board-detail-item');
 
     var View = Backbone.View.extend({
         events: {
@@ -10,7 +10,7 @@ define(function(require){
         },
 
         initialize: function(){
-            this.setElement(boardDetailItem(this.serialize()));
+            this.setElement(boardDetailItemTemplate(this.serialize()));
             
             this.model.on('change:spots', this.render.bind(this));
             this.model.on('change:players', this.updateJoinable.bind(this));

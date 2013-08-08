@@ -1,7 +1,7 @@
 define(function(require){
     var Backbone = require('backbone');
     var Player = require('models/player');
-    var boardDetailItemSpot = require('hbs!templates/board-detail-item-spot');
+    var boardDetailItemSpotTemplate = require('hbs!templates/board/board-detail-item-spot');
     var settings = require('settings');
 
     var View = Backbone.View.extend({
@@ -16,7 +16,7 @@ define(function(require){
         },
 
         beforeRender: function(){
-            this.setElement(boardDetailItemSpot(this.serialize));
+            this.setElement(boardDetailItemSpotTemplate(this.serialize));
         },
 
         play: function(e){

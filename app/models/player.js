@@ -14,6 +14,14 @@ define(function(require){
             };
         },
 
+        initialize: function(){
+            this.whoAmI();
+        },
+
+        whoAmI: function(){
+
+        },
+
         requestLogin: function(email){
             return $.ajax({
                 type: 'POST',

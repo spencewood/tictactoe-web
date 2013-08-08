@@ -3,12 +3,12 @@ define(function(require, exports, module) {
     var Boards = require('collections/boards');
     var BoardCreateView = require('views/board/board-create-view');
     var BoardDetailView = require('views/board/board-detail-view');
-    var AccountLoginView = require('views/account/account-login-view');
+    var AccountView = require('views/account/account-view');
     var SettingsFilterMenuView = require('views/settings/settings-filter-menu-view');
 
     var filter = new SettingsFilterMenuView({ el: '.filter-container' });
     new BoardDetailView({ el: '.board-detail-container' });
-    new AccountLoginView({ el: '.login-container' });
+    new AccountView({ el: '.login-container' });
     new BoardCreateView({ el: '.board-create-container' });
 
     // Defining the application router.
