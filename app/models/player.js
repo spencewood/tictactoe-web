@@ -3,9 +3,13 @@
  */
 
 define(function(require){
+    var $ = require('jquery');
     var Backbone = require('backbone');
     var guid = require('helpers/guid');
     var settings = require('settings');
+
+    var isLoggedIn = false;
+    var loginStatusKnown = $.Deferred();
 
     var Player = Backbone.Model.extend({
         defaults: function(){
@@ -18,8 +22,16 @@ define(function(require){
             this.whoAmI();
         },
 
-        whoAmI: function(){
+        loginStatusKnown: function(){
+            return loginStatusKnown.promise();
+        },
 
+        isLoggedIn: function(){
+            return isLoggedIn;
+        },
+
+        whoAmI: function(){
+            loginStatusKnown.resolve();
         },
 
         requestLogin: function(email){

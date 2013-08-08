@@ -1,4 +1,5 @@
 define(function(require){
+    var $ = require('jquery');
     var Backbone = require('backbone');
     var Player = require('models/player');
     var AccountLogoutView = require('views/account/account-logout-view');
@@ -6,17 +7,17 @@ define(function(require){
 
     var View = Backbone.View.extend({
         initialize: function(){
-            Player.on('loggedIn', this.renderLoggedIn.bind(this));
-            Player.on('loggedOut', this.renderLoggedOut.bind(this));
+            $.when(Player.loginStatusKnown()).then(this.renderView.bind(this));
+
+            Player.on('loggedIn loggedOut', this.renderView.bind(this));
         },
 
-        renderLoggedIn: function(){
-            this.setView(new AccountLogoutView());
-            this.render();
-        },
+        renderView: function(){
+            this.setView(Player.isLoggedIn() ?
+                new AccountLogoutView() :
+                new AccountLoginView()
+            );
 
-        renderLoggedOut: function(){
-            this.setView(new AccountLoginView());
             this.render();
         }
     });
