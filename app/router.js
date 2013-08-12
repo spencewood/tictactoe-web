@@ -1,6 +1,7 @@
 define(function(require, exports, module) {
     var Backbone = require('backbone');
     var Boards = require('collections/boards');
+    var Player = require('models/player');
     var BoardCreateView = require('views/board/board-create-view');
     var BoardDetailView = require('views/board/board-detail-view');
     var AccountView = require('views/account/account-view');
@@ -18,7 +19,9 @@ define(function(require, exports, module) {
             'my': 'my',
             'active': 'active',
             'completed': 'completed',
-            'admin': 'admin'
+            'admin': 'admin',
+            'accounts/login/:token': 'login',
+            'accounts/logout': 'logout'
         },
 
         index: function(){
@@ -35,8 +38,19 @@ define(function(require, exports, module) {
 
         completed: function(){
             filter.navigate('completed');
+        },
+
+        login: function(token){
+            Player.set('token', token);
+            this.navigate('', { trigger: true });
+        },
+
+        logout: function(){
+            Player.logout();
+            this.navigate('', { trigger: true });
         }
     });
 
+    Player.whoAmI();
     Boards.fetch({ reset: true });
 });

@@ -1,37 +1,30 @@
 var tests = [
-
-  // Load the example tests, replace this and add your own tests.
-  "tests/example",
-
-  // Ensure the boilerplate functions correctly.
-  "tests/boilerplate/router"
-
+    // Load the example tests, replace this and add your own tests.
+    'tests/storage-controller-test',
 ];
 
 // Prefer the BDD testing style.
-mocha.setup("bdd");
+mocha.setup('bdd');
 
 // Make async.
 if (window.__karma__) {
     window.__karma__.loaded = function() {};
 }
 
-// Set up the assertion library.
-// Compatible libraries: http://visionmedia.github.io/mocha/#assertions
-window.expect = chai.expect;
-
-require({
+require(
+    {
         // Set the application endpoint.
         paths: {
-            tests: "../test/mocha/tests"
+            tests: '../test/mocha/tests',
+            chai: '../test/mocha/vendor/chai'
         },
 
         // Determine the baseUrl if we are in Karma or not.
-        baseUrl: window.__karma__ ? "base/app" : "../../app"
+        baseUrl: window.__karma__ ? 'base/app' : '../../app'
     },
 
     // Load the configuration.
- ["config"],
+    ['config'],
 
     function() {
         // Load all tests.
@@ -46,4 +39,5 @@ require({
             }
 
         });
-    });
+    }
+);

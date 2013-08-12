@@ -10,6 +10,8 @@ define(function(require){
             2: '',
             3: 'x',
             5: 'o'
-        }
+        },
+
+        playerStorage: 'playerToken'
     };
 });
