@@ -46,6 +46,7 @@
 
 .login-container{
     padding-top: 20px;
+    overflow: hidden;
 }
 
 .login-container .request-login-form{

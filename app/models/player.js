@@ -34,6 +34,7 @@ define(function(require){
                 this.set('token', token);
             }
 
+            this.on('change:token', this.storeToken.bind(this));
             this.on('change:token', this.whoAmI.bind(this));
         },
 
@@ -47,6 +48,10 @@ define(function(require){
 
         getToken: function(){
             return getToken();
+        },
+
+        storeToken: function(){
+            storeToken(this.get('token'));
         },
 
         logout: function(){
@@ -64,18 +69,14 @@ define(function(require){
 
         //ajax
         whoAmI: function(){
-            var token = this.get('token');
-            if(typeof token === 'undefined'){
+            var token = getToken();
+            if(typeof token === 'undefined' || token === null){
                 isLoggedIn = false;
                 loginStatusKnown.resolve();
             }
             else{
                 $.ajax({
-                    type: 'POST',
-                    url: settings.baseApiUrl + '/accounts/whoAmI',
-                    data: {
-                        token: token
-                    }
+                    url: settings.baseApiUrl + '/accounts/whoAmI'
                 })
                 .done(this.handleUserData.bind(this))
                 .fail(this.logout.bind(this))
