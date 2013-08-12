@@ -52,7 +52,6 @@ define(function(require){
 
         whoAmI: function(){
             var token = this.get('token');
-            console.log('who am i', token);
             if(typeof token === 'undefined'){
                 isLoggedIn = false;
                 loginStatusKnown.resolve();

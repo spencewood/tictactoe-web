@@ -8,17 +8,24 @@ define(function(require){
         collection: Boards,
 
         initialize: function(){
-            this.$el.isotope({
-                itemSelector: '.board-container',
-                layoutMode: 'fitRows'
-            });
-
             this.collection.on('reset', this.render.bind(this));
             this.collection.on('add', this.add.bind(this));
+
+            Backbone.Events.on('boardFilter', this.filter.bind(this));
+
+            this.$el.isotope({
+                itemSelector: '.board-container',
+                layoutMode: 'fitRows',
+                filter: '*'
+            });
         },
 
         reload: function(){
             this.$el.isotope('reloadItems');
+        },
+
+        filter: function(filter){
+            this.$el.isotope({ filter: filter === '' ? '' : '.' + filter });
         },
 
         insertIsotope: function(view){
@@ -40,7 +47,6 @@ define(function(require){
         },
 
         add: function(model){
-            console.log('calling add');
             this.addView(model, true);
         },
 

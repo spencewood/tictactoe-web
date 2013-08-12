@@ -15,6 +15,7 @@ define(function(require){
             this.clearActive();
             var item = this.$el.find('li a[href=\\/' + route + ']').parents('li:first');
             this.setActive(item);
+            Backbone.Events.trigger('boardFilter', route);
         }
     });
 
