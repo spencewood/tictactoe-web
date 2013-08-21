@@ -5,19 +5,19 @@ define(function(require){
 
     var View = Backbone.View.extend({
         template: settingsFilterMenuLoggedOut,
-        route: 'active',
+        filter: 'active',
 
         initialize: function(){
             this.render();
             //$.when(Player.loginStatusKnown()).then(this.renderActive.bind(this));
 
             Player.on('loggedIn loggedOut', this.renderActive.bind(this));
-            Backbone.Events.on('route:update', this.updateRoute.bind(this));
-            Backbone.Events.on('route:update', this.renderActive.bind(this));
+            Backbone.Events.on('filter:update', this.updateRoute.bind(this));
+            Backbone.Events.on('filter:update', this.renderActive.bind(this));
         },
 
-        updateRoute: function(route){
-            this.route = route;
+        updateRoute: function(filter){
+            this.filter = filter;
         },
 
         clearActive: function(){
@@ -30,9 +30,8 @@ define(function(require){
 
         renderActive: function(){
             this.clearActive();
-            var item = this.$el.find('li a[href=\\/' + this.route + ']').parents('li:first');
+            var item = this.$el.find('li a[href=\\/' + this.filter + ']').parents('li:first');
             this.setActive(item);
-            Backbone.Events.trigger('boardFilter', this.route);
         }
     });
 

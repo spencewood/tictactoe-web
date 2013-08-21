@@ -11,7 +11,7 @@ define(function(require){
             this.collection.on('reset', this.render.bind(this));
             this.collection.on('add', this.add.bind(this));
 
-            Backbone.Events.on('boardFilter', this.filter.bind(this));
+            Backbone.Events.on('filter:update', this.filter.bind(this));
 
             this.$el.isotope({
                 itemSelector: '.board-container',

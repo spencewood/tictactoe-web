@@ -25,19 +25,19 @@ define(function(require, exports, module) {
         },
 
         index: function(){
-            Backbone.Events.trigger('route:update', '');
+            Backbone.Events.trigger('filter:update', '');
         },
 
         my: function(){
-            Backbone.Events.trigger('route:update', 'my');
+            Backbone.Events.trigger('filter:update', 'my');
         },
 
         active: function(){
-            Backbone.Events.trigger('route:update', 'active');
+            Backbone.Events.trigger('filter:update', 'active');
         },
 
         completed: function(){
-            Backbone.Events.trigger('route:update', 'completed');
+            Backbone.Events.trigger('filter:update', 'completed');
         },
 
         login: function(token){
