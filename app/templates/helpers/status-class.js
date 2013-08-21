@@ -3,14 +3,14 @@ define(function(require){
     var _ = require('underscore');
 
     var getStatusClass = function(context, options){
-        if(_.result(context.isComplete)){
-            return 'complete';
+        if(context.isComplete){
+            return 'completed';
         }
         else if(_.result(context.isReady) && _.result(context.canPlay)){
-            return 'ready';
+            return 'ready active';
         }
         else{
-            return 'waiting';
+            return 'waiting active';
         }
     };
 

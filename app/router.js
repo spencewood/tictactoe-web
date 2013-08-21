@@ -7,7 +7,7 @@ define(function(require, exports, module) {
     var AccountView = require('views/account/account-view');
     var SettingsFilterMenuView = require('views/settings/settings-filter-menu-view');
 
-    var filter = new SettingsFilterMenuView({ el: '.filter-container' });
+    new SettingsFilterMenuView({ el: '.filter-container' });
     new BoardDetailView({ el: '.board-detail-container' });
     new AccountView({ el: '.login-container' });
     new BoardCreateView({ el: '.board-create-container' });
@@ -25,19 +25,19 @@ define(function(require, exports, module) {
         },
 
         index: function(){
-            filter.navigate();
+            Backbone.Events.trigger('route:update', '');
         },
 
         my: function(){
-            filter.navigate('my');
+            Backbone.Events.trigger('route:update', 'my');
         },
 
         active: function(){
-            filter.navigate('active');
+            Backbone.Events.trigger('route:update', 'active');
         },
 
         completed: function(){
-            filter.navigate('completed');
+            Backbone.Events.trigger('route:update', 'completed');
         },
 
         login: function(token){

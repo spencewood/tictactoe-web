@@ -125,14 +125,14 @@ select.board-list{
     color: orange;
 }
 
-.board.complete{
+.complete .board{
     border: 1px solid #333;
 }
 
-.board.ready{
+.ready .board{
     border: 1px solid green;
 }
 
-.board.waiting{
+.waiting .board{
     border: 1px solid orange;
 }

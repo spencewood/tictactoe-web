@@ -5,7 +5,6 @@ define(function(require){
     var Controller = {
         create: function(m){
             Boards.add([{ _id: m.boardId }]);
-
             Backbone.Events.trigger('board:create', m);
         },
 
