@@ -7,7 +7,11 @@ define(function(require){
         events: {
         },
         
-        template: logoutTemplate
+        template: logoutTemplate,
+
+        serialize: function(){
+            return this.model.toJSON();
+        }
     });
 
     return View;

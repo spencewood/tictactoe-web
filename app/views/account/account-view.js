@@ -14,7 +14,7 @@ define(function(require){
 
         renderView: function(){
             this.setView(Player.isLoggedIn() ?
-                new AccountLogoutView() :
+                new AccountLogoutView({ model: Player }) :
                 new AccountLoginView()
             );
 
