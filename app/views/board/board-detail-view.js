@@ -24,8 +24,12 @@ define(function(require){
             this.$el.isotope('reloadItems');
         },
 
-        filter: function(filter){
-            this.$el.isotope({ filter: filter === '' ? '' : '.' + filter });
+        filter: function(filters){
+            this.$el.isotope({
+                filter: filters.map(function(filter){
+                    return '.' + filter;
+                }).join(', ')
+            });
         },
 
         insertIsotope: function(view){

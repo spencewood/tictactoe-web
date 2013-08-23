@@ -11,12 +11,12 @@ define(function(require){
             this.render();
             //$.when(Player.loginStatusKnown()).then(this.renderActive.bind(this));
 
-            Player.on('loggedIn loggedOut', this.renderActive.bind(this));
-            Backbone.Events.on('filter:update', this.updateRoute.bind(this));
-            Backbone.Events.on('filter:update', this.renderActive.bind(this));
+            //Player.on('loggedIn loggedOut', this.renderActive.bind(this));
+            Backbone.Events.on('route:update', this.updateFilter.bind(this));
+            Backbone.Events.on('route:update', this.renderActive.bind(this));
         },
 
-        updateRoute: function(filter){
+        updateFilter: function(filter){
             this.filter = filter;
         },
 
@@ -29,9 +29,12 @@ define(function(require){
         },
 
         renderActive: function(){
+            var item = this.$el.find('li a[href=\\/' + this.filter + ']');
+            var parent = item.parents('li:first');
+            var filters = item.data('filters');
+            Backbone.Events.trigger('filter:update', typeof filters !== 'undefined' ? filters.split(' ') : []);
             this.clearActive();
-            var item = this.$el.find('li a[href=\\/' + this.filter + ']').parents('li:first');
-            this.setActive(item);
+            this.setActive(parent);
         }
     });
 

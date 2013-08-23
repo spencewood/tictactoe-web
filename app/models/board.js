@@ -12,20 +12,32 @@ define(function(require){
                 isComplete: false,
                 players: [],
                 spots: [2, 2, 2, 2, 2, 2, 2, 2, 2],
-                turn: 0,
-                status: 'waiting'
+                turn: 0
             };
         },
 
         toJSON: function(){
             var json = Backbone.Model.prototype.toJSON.apply(this, arguments);
-            json.isReady = this.get('players').length === 2;
+            json.status = this.getStatus();
             return json;
+        },
+
+        getStatus: function(){
+            if(this.get('isComplete')){
+                return 'completed';
+            }
+            else if(this.canPlay()){
+                return 'ready';
+            }
+            else{
+                return 'waiting';
+            }
         },
 
         canJoin: function(playerId){
             var players = this.get('players');
-            return players.length < 2 &&
+            return ! this.get('isComplete') &&
+                players.length < 2 &&
                 players.indexOf(playerId) === -1;
         },
 
