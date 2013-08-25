@@ -41,7 +41,7 @@ define(function(require, exports, module) {
         },
 
         login: function(token){
-            Player.set('token', token);
+            Player.login(token);
             this.navigate('', { trigger: true });
         },
 

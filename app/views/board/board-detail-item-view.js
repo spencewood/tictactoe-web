@@ -5,11 +5,14 @@ define(function(require){
     var boardDetailItemTemplate = require('hbs!templates/board/board-detail-item');
 
     var View = Backbone.View.extend({
+        template: boardDetailItemTemplate,
+
         events: {
             'click .join': 'join'
         },
 
         initialize: function(){
+            //FIX: make this use the template and auto serialize
             this.setElement(boardDetailItemTemplate(this.serialize()));
             
             this.model.on('change:spots', this.render.bind(this));

@@ -59,12 +59,18 @@ define(function(require){
             this.trigger('loggedOut');
         },
 
+        login: function(token){
+            this.set('token', token);
+            this.requestIdentity().done(function(){
+                this.trigger('loggedIn');
+            }.bind(this));
+        },
+
         handleUserData: function(data){
             data.id = data._id;
             delete data._id;
             this.set(data, { silent: true });
             storeToken(data.token);
-            this.trigger('loggedIn');
         },
 
         //ajax
@@ -75,15 +81,18 @@ define(function(require){
                 loginStatusKnown.resolve();
             }
             else{
-                $.ajax({
-                    url: settings.baseApiUrl + '/accounts/whoAmI'
-                })
-                .done(this.handleUserData.bind(this))
-                .fail(this.logout.bind(this))
-                .always(loginStatusKnown.resolve);
+                this.requestIdentity().always(loginStatusKnown.resolve);
             }
 
             return loginStatusKnown;
+        },
+
+        requestIdentity: function(){
+            return $.ajax({
+                url: settings.baseApiUrl + '/accounts/whoAmI'
+            })
+            .done(this.handleUserData.bind(this))
+            .fail(this.logout.bind(this));
         },
 
         requestLogin: function(email){

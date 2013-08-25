@@ -7,18 +7,16 @@ define(function(require){
 
     var View = Backbone.View.extend({
         initialize: function(){
-            $.when(Player.loginStatusKnown()).then(this.renderView.bind(this));
+            $.when(Player.loginStatusKnown()).then(this.render.bind(this));
 
-            Player.on('loggedIn loggedOut', this.renderView.bind(this));
+            Player.on('loggedIn loggedOut', this.render.bind(this));
         },
 
-        renderView: function(){
+        beforeRender: function(){
             this.setView(Player.isLoggedIn() ?
                 new AccountLogoutView({ model: Player }) :
                 new AccountLoginView()
             );
-
-            this.render();
         }
     });
 
