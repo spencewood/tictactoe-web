@@ -41,8 +41,8 @@ define(function(require){
 
     var boardMoveDeferred = $.Deferred();
     pubnub.subscribe({
-        channel: channel('board:move'),
-        message: BoardController.move,
+        channel: channel('board:play'),
+        message: BoardController.play,
         connect: boardMoveDeferred.resolve
     });
 

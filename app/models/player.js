@@ -38,9 +38,7 @@ define(function(require){
             this.on('change:token', this.whoAmI.bind(this));
         },
 
-        loginStatusKnown: function(){
-            return loginStatusKnown.promise();
-        },
+        loginStatusKnown: loginStatusKnown.promise,
 
         isLoggedIn: function(){
             return isLoggedIn;

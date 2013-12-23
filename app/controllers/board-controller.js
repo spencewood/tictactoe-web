@@ -38,18 +38,18 @@ define(function(require){
             Backbone.Events.trigger('board:ready', m);
         },
 
-        move: function(m){
+        play: function(m){
             var board = Boards.get(m.boardId);
             if(board !== null){
                 board.set('spots', m.spots);
             }
-            Backbone.Events.trigger('board:move', m);
+            Backbone.Events.trigger('board:play', m);
         },
 
         complete: function(m){
             var board = Boards.get(m.boardId);
             if(board !== null){
-                board.set({ status: 'complete' })
+                board.set({ status: 'complete' });
             }
             Backbone.Events.trigger('board:complete', m);
         }
